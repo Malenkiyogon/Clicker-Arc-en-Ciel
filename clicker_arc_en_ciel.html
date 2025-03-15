@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clicker Arc-en-Ciel</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+            transition: background 0.5s;
+        }
+        h1 {
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-size: 3em;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: scale(1.1);
+        }
+        .btn-dark {
+            background: #000;
+            color: #fff;
+        }
+        .btn-light {
+            background: #fff;
+            color: #000;
+        }
+        iframe {
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="counter">TétraHydre Base 3 | 4 ayv: 8</h1>
+    <button class="btn-dark" onclick="clickEowyn(1)">+1 (TétraHydre)</button>
+    <button class="btn-light" onclick="clickEowyn(-1)">-1 (TétraHydre)</button>
+    <iframe id="playlistFrame" src="https://open.spotify.com/embed/playlist/5l5CWFXEbwANHk6sEIA2fA" width="300" height="80" frameBorder="0" allowfullscreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+    <script>
+        let clicks = 8;
+        let playlistIndex = 0;
+        let playlists = [
+            'https://open.spotify.com/embed/playlist/5l5CWFXEbwANHk6sEIA2fA',
+            'https://open.spotify.com/embed/playlist/0p3I9xwQyylWh36WI0VaP7',
+            'https://open.spotify.com/embed/playlist/6P7PNwtNRhEoFcgfGpQ7Lu'
+        ];
+
+        function clickEowyn(change) {
+            clicks += change;
+            if (clicks < 0) clicks = 0;
+            document.getElementById("counter").innerText = `TétraHydre Base 3 | 4 ayv: ${clicks}`;
+            
+            document.body.style.background = `hsl(${clicks * 15 % 360}, 100%, 50%)`;
+            updatePlaylist();
+        }
+
+        function updatePlaylist() {
+            playlistIndex = (playlistIndex + 1) % playlists.length;
+            document.getElementById("playlistFrame").src = playlists[playlistIndex];
+        }
+    </script>
+</body>
+</html>
